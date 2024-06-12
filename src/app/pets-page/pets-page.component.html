@@ -1,0 +1,29 @@
+<!-- Pets-Listing page -->
+<div class="container">
+  <h2 class="display-2 my-3 text-primary">My Pets</h2>
+  <p><a class="btn btn-primary mb-3" href="add-pet" role="button">Add Pet</a></p>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Species</th>
+        <th>Date of Birth</th>
+        <th>Date of Death</th>
+        <th>Note</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (pet of pets; track pet.id){
+      <tr>
+        <td>{{ pet.name }}</td>
+        <td>{{ pet.species }}</td>
+        <td>{{ pet.dateOfBirth ? formatDate(pet.dateOfBirth) : '' }}</td>
+        <td>{{ pet.dateOfDeath ? formatDate(pet.dateOfDeath) : 'Still Alive' }}</td>
+        <td>{{ pet.note }}</td>
+        <td><button class="btn btn-sm btn-primary" [routerLink]="['/edit-pet', pet.id]">Edit</button></td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
