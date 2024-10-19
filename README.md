@@ -1,27 +1,84 @@
-# PetCatalogue
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+# PetCatalogue Frontend (Angular)
 
-## Development server
+This is the frontend of the PetCatalogue application, built with Angular. It allows users to interact with the PetCatalogue API to view, add, edit, and delete pets from the catalogue.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- A clean, user-friendly interface to manage pets.
+- **Routing** for navigation between pages (Main page, Pets, Add/Edit Pet, About).
+- Integration with the **PetCatalogue API** for CRUD operations.
+- **Navigation bar** for easy access to different pages (Main, Pets, About).
+- Dynamic content on the main page showing the number of living and deceased pets.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Requirements
 
-## Build
+- **Node.js >= 12.x**
+- **npm >= 6.x**
+- **Angular CLI >= 12.x**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Getting Started
 
-## Running unit tests
+### 1. Clone the repository
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+git clone https://github.com/your-username/pet-catalogue.git
+cd pet-catalogue/client
+```
 
-## Running end-to-end tests
+### 2. Install Dependencies
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+```
 
-## Further help
+### 3. Set Up the Environment
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Create an environment file `src/environments/environment.ts` with the API URL:
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8000/api'
+};
+```
+
+### 4. Run the Application
+
+You can start the Angular development server by running:
+
+```bash
+ng serve
+```
+
+The frontend will be available at [http://localhost:4200](http://localhost:4200).
+
+### Project Structure
+
+- **Main page**: Displays a welcome message along with dynamic content showing the number of pets.
+- **Pets page**: Lists all the pets, with options to add, edit, or delete pets.
+- **Add/Edit Pet page**: A form to add or edit a pet’s details.
+- **About page**: Displays information about the developer (your name, Neptun ID, email).
+
+### Routing
+
+The application has the following routes:
+- `/` - Main page
+- `/pets` - List of pets
+- `/pets/add` - Add new pet
+- `/pets/edit/:id` - Edit existing pet
+- `/about` - About page
+
+### Build the Project for Production
+
+To build the project for production, run:
+
+```bash
+ng build --prod
+```
+
+This will generate the compiled files in the `dist/` folder.
+
+## License
+
+This project is licensed under the MIT License.
