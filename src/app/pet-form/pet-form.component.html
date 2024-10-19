@@ -1,0 +1,69 @@
+{{ pet | json }}
+<hr />
+{{ petForm.value | json }}
+<form [formGroup]="petForm" (ngSubmit)="handleSubmit()" action="" novalidate>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      formControlName="name"
+      [class.is-valid]="name?.valid"
+      [class.is-invalid]="name?.invalid && (name?.dirty || name?.touched)"
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="Name"
+      required
+    />
+    <div class="invalid-feedback">Please provide a name!</div>
+  </div>
+  <div class="form-group">
+    <label for="species">Species</label>
+    <input
+      formControlName="species"
+      [class.is-valid]="species?.valid"
+      [class.is-invalid]="species?.invalid && (species?.dirty || species?.touched)"
+      type="text"
+      class="form-control"
+      id="species"
+      placeholder="Species"
+      required
+    />
+    <div class="invalid-feedback">Please provide a species!</div>
+  </div>
+  <div class="form-group">
+    <label for="dateOfBirth">Date of Birth</label>
+    <input
+      formControlName="dateOfBirth"
+      [class.is-valid]="dateOfBirth?.valid"
+      [class.is-invalid]="dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)"
+      type="date"
+      class="form-control"
+      id="dateOfBirth"
+      required
+    />
+    <div class="invalid-feedback">Please provide a date of birth!</div>
+  </div>
+  <div class="form-group">
+    <label for="dateOfDeath">Date of Death</label>
+    <input
+      formControlName="dateOfDeath"
+      [class.is-valid]="dateOfDeath?.valid"
+      [class.is-invalid]="dateOfDeath?.invalid && (dateOfDeath?.dirty || dateOfDeath?.touched)"
+      type="date"
+      class="form-control"
+      id="dateOfDeath"
+    />
+  </div>
+  <div class="form-group">
+    <label for="note">Note</label>
+    <textarea
+      formControlName="note"
+      [class.is-valid]="note?.valid"
+      [class.is-invalid]="note?.invalid && (note?.dirty || note?.touched)"
+      class="form-control"
+      id="note"
+      rows="5"
+    ></textarea>
+  </div>
+  <button [disabled]="petForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,39 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pet } from '../pet';
 import { RouterLink } from '@angular/router';
+import { PetService } from '../pet.service';
+import { JsonPipe } from '@angular/common';
+import { AddPetPageComponent } from '../add-pet-page/add-pet-page.component';
+import { EditPetPageComponent } from '../edit-pet-page/edit-pet-page.component';
+
 
 @Component({
   selector: 'app-pets-page',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, JsonPipe, AddPetPageComponent, EditPetPageComponent],
   templateUrl: './pets-page.component.html',
   styleUrl: './pets-page.component.css'
 })
-export class PetsPageComponent {
-  pets: Pet[] = [
-    {
-      id: 1,
-      name: 'Fluffy',
-      species: 'Cat',
-      dateOfBirth: new Date(2010, 5, 1),
-      dateOfDeath: undefined,
-      note: 'Fluffy is a very fluffy cat.',
-    },
-    {
-      id: 2,
-      name: 'Fido',
-      species: 'Dog',
-      dateOfBirth: new Date(2015, 2, 1),
-      dateOfDeath: undefined,
-      note: 'Fido is a very friendly dog.',
-    },
+export class PetsPageComponent implements OnInit{
+  pets: Pet[] = [];
+  selectedPet: Pet | null = null;
 
-  ];
-  formatDate(date: Date | undefined): string {
-    if (!date) return '';
+  constructor(private petService: PetService) {}
+
+  async ngOnInit() {
+    this.pets = await this.petService.getPets();
+  }
+
+  handleSave(pet: Pet) {
+    // console.log(issue);
+    if (this.selectedPet) {
+      Object.assign(this.selectedPet, pet);
+    }
+    this.selectedPet = null;
+  }
+
+  formatDate(date: Date | string): string {
+    if (!(date instanceof Date)) {
+      date = new Date(date);
+    }
+  
+    if (isNaN(date.getTime())) {
+      // date is not a valid Date object
+      return '';
+    }
+  
     const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are 0-based in JavaScript
-    const day = ('0' + date.getDate()).slice(-2);
-    return `${year}.${month}.${day}`;
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+  
+    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
   }
 }
